@@ -1,0 +1,34 @@
+%% VJEŽBE 9:OPTIMIZACIJA
+%% Zadatak 2.1.
+Aeq = [1,1,1,1];
+beq = 950;
+Ain = [2,3,4,7;3,4,5,6];
+bin = [4600;5000];
+lb = [0;0;0;400];
+ub = [];
+c = [4;6;7;8];
+opt = optimoptions('linprog','Algorithm','interior-point')
+[x_optimalno,f_max] = linprog(-c,Ain,bin,Aeq,beq,lb,ub,opt)
+
+%% Zadatak 2.2.
+H = [3,-1,1;-1,2,1;1,1,4];
+c = [-1;-2;-3];
+Aeq = [2,-1,3];
+beq = 1;
+Ain = [1,2,-1;-eye(3)];
+bin = [2.5;zeros(3,1)];
+opt = optimset('Display','iter')
+lb = [];
+ub = [];
+x0 = [];
+[x_opt,f_min] = quadprog(H,c,Ain,bin,Aeq,beq,lb,ub,x0,opt)
+
+%% Zadatak 2.3.
+x0 = [-1;-1];
+Ain = [];
+bin = [];
+Aeq = [];
+beq = [];
+lb = [];
+ub = [];
+[x_opt,f_min] = fmincon(@cost_fun,x0,Ain,bin,Aeq,beq,lb,ub,@my_con)
